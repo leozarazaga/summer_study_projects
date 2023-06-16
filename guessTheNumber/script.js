@@ -1,4 +1,4 @@
-
+//Testing GIT
 //let secretNumber = document.querySelector('.number').textContent = Math.floor(Math.random() * 20) + 1;
 let secretNumber = Math.floor(Math.random() * 20) + 1;
 let score = 20;
