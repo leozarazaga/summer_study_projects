@@ -104,11 +104,6 @@ document.querySelector('.again').addEventListener('click', handlePlayAgainButton
 initializeGame()
 
 
-
-
-
-
-
 // - - - - - - - - - - - - - - - - - - O L D  C O D E - - - - - - - - - - - - - - - - - - 
 
 /* //let secretNumber = document.querySelector('.number').textContent = Math.floor(Math.random() * 20) + 1;
