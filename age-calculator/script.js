@@ -24,7 +24,7 @@ let getAge = (birthdayValue) => {
     const birthdayDate = new Date(birthdayValue); 
     console.log(birthdayDate);
   
-    const age = currentDate.getFullYear() - birthdayDate.getFullYear();
+    let age = currentDate.getFullYear() - birthdayDate.getFullYear();
     const month = currentDate.getMonth() - birthdayDate.getMonth();
 
     if(month < 0 || month === 0 && currentDate.getDate() < birthdayDate.getDate()){
