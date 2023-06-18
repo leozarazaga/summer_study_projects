@@ -4,9 +4,9 @@ const calculateButton = document.getElementById('calculate');
 const displayTotal = document.getElementById('total');
 
 let calculateTip = () => {
-    let billValue = parseFloat(billElement.value);
-    let tipValue = parseFloat(tipElement.value);
-    let totalValue = billValue + (billValue * (tipValue / 100));
+    let billValue = billElement.value;
+    let tipValue = tipElement.value;
+    let totalValue = billValue * (1 + tipValue / 100);
 
     displayTotal.textContent = totalValue.toFixed(2)
 
