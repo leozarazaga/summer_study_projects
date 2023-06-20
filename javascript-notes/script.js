@@ -224,7 +224,7 @@ console.log(two, five, six); */
 
 // - - - - - - - - - - - - - - - - - DESTRUCTURING OBJECTS- - - - - - - - - - - - - - - - - 
 
-const restaurant = {
+/* const restaurant = {
     name: 'Clasico Italiano',
     locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
     categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
@@ -263,6 +263,8 @@ restaurant.orderDelivery({
     starterIndex: 2,
 })
 
+//Example 1
+
 //const {name, openingHours, categories} = restaurant;
 
 //console.log(name, openingHours, categories);
@@ -286,4 +288,77 @@ restaurant.orderDelivery({
 //console.log(o, c);
 
 // const{friday : {open, close}} = openingHours;;
-// console.log(open, close);
+// console.log(open, close); */
+
+// - - - - - - - - - - - - - - - - - SPREAD OPERATOR - - - - - - - - - - - - - - - - - 
+
+const restaurant = {
+    name: 'Clasico Italiano',
+    locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
+    starterMenu: ['Foccacia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+    openingHours: {
+        thursday: {
+            open: 12,
+            close: 22,
+        },
+        friday: {
+            open: 11,
+            close: 23,
+        },
+        saturday: {
+            open: 0,
+            close: 24,
+        }
+    },
+
+    order: function (starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    },
+
+    orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+    },
+
+    orderPasta: function (x, y, z) {
+        console.log(`Here is your pasta with ${x}, ${y} and ${z}.`);
+    }
+}
+
+
+//Example 1
+const newMenu = [...restaurant.mainMenu, 'Gnocci']
+console.log(newMenu);
+
+//Copy array
+
+const mainMenu = [...restaurant.mainMenu];
+
+//Join 2 arrays
+
+let menu = [...restaurant.starterMenu, ...restaurant.mainMenu]
+console.log(menu);
+
+//Iterables are: arrays, strings, maps, sets, NOT objects!
+
+const str = "Jonas";
+const letter = [...str, '', 'S.'];
+console.log(letter);
+
+
+//Real word example: Ordering pasta
+const ingredients =  ["bacon", 'eggs', 'cheese']
+restaurant.orderPasta(...ingredients);
+
+//Objects
+const newRestaurant ={foundedIn: 1998, ...restaurant, founder: 'Guido'};
+console.log(newRestaurant);
+
+//Shallow copy
+const restaurantCopy = {...restaurant};
+restaurant.name = "Ristorante Milano";
+
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
