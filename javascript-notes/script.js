@@ -161,4 +161,78 @@ jessicaCopy.lastName = "Davis";
 console.log('Before marriage:', jessica2);
 console.log('After marriage;', jessicaCopy); */
 
-// - - - - - - - - - - - - - - - - - XXX - - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - DESTRUCTURING ARRAYS - - - - - - - - - - - - - - - - - 
+
+/* const restaurant = {
+    name: 'Clasico Italiano',
+    locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
+    starterMenu: ['Foccacia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+    order: function (starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    }
+}
+
+const { name, locationn } = restaurant;
+
+let arr = [2, 3, 4];
+
+let a = arr[0];
+let b = arr[1];
+let c = arr[2]
+
+console.log(a, b, c);
+
+//Destructuring
+
+const [x, y, z] = arr;
+console.log(x, y, z);
+
+let [main, , secondary] = restaurant.categories;
+console.log(main, secondary);
+
+
+//Switching Variables (Manually)
+//const temp = main;
+//main = secondary;
+//secondary = temp;
+//console.log(main, secondary)
+
+
+//Destructuring (Switching variables)
+[main, secondary] = [secondary, main]
+console.log(main, secondary)
+
+//Example 1
+//console.log(restaurant.order(2, 0));
+
+//Recive 2 return values from a function
+const [starter, mainCourse] = restaurant.order(2, 0)
+console.log(starter, mainCourse);
+
+
+//Example 2 - Nested array
+
+const nested = [2, 4, [5, 6]];
+//2
+//5,6
+
+const [two, , [five, six]] = nested;
+console.log(two, five, six); */
+
+// - - - - - - - - - - - - - - - - - DESTRUCTURING OBJECTS- - - - - - - - - - - - - - - - - 
+
+const restaurant = {
+    name: 'Clasico Italiano',
+    locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
+    starterMenu: ['Foccacia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+    order: function (starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    }
+}
+
