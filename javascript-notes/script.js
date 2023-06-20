@@ -1,3 +1,5 @@
+'use strict';
+
 // - - - - - - - - - - - - - - - - - SCOPING - - - - - - - - - - - - - - - - - 
 
 /* const firstname = "Leo";
@@ -61,3 +63,102 @@ function deleteShoppingCart(){
 
 
 // - - - - - - - - - - - - - - - - - THIS - - - - - - - - - - - - - - - - - 
+
+
+
+//console.log(this);
+
+/* 
+const calcAge = function(birthyear){
+    console.log(2023 - birthyear);
+    //console.log(this);
+}
+calcAge(1990)
+
+//Arrow
+ const calcAgeArrow = (birthyear) => {
+    console.log(2023 - birthyear);
+   // console.log(this);
+} 
+
+calcAgeArrow(1995)
+
+//Example 2
+
+const jonas = {
+    year: 1990,
+    calcAge: function(){
+        console.log(this);
+        console.log(2023 - this.year);
+    }
+}
+
+jonas.calcAge()
+
+//Example 3
+
+const matilda = {
+    year: 2000,
+}
+
+matilda.calcAge = jonas.calcAge;
+matilda.calcAge() */
+
+// - - - - - - - - - - - - - - - - -PRIMITIVES VS OBJECTS - - - - - - - - - - - - - - - - - 
+
+/* let age = 30;
+let oldAge = age;
+age = 31;
+
+console.log(age);
+console.log(oldAge);
+
+const me ={
+    name: 'Jonas',
+    age: 30,
+}
+
+const friend = me;
+friend.age = 27;
+console.log('Friend', friend);
+console.log('Me', me); */
+
+//Example
+
+/* //Primitive types
+let lastName = 'Williams';
+let oldLastName = lastName;
+
+lastName = 'Davis';
+console.log(lastName);
+console.log(oldLastName);
+
+
+//Reference types
+const jessica = {
+    firstName: 'Jessica',
+    lastName: 'Williams',
+    age: 27,
+};
+
+const marriedJessica = jessica;
+marriedJessica.lastName = 'Davis';
+
+console.log('Before marriage:', jessica);
+console.log('After marriage;', marriedJessica);
+
+//Copying objects
+const jessica2 = {
+    firstName: 'Jessica',
+    lastName: 'Williams',
+    age: 27,
+};
+
+//This will be a new object
+const jessicaCopy = Object.assign({}, jessica2);
+jessicaCopy.lastName = "Davis";
+
+console.log('Before marriage:', jessica2);
+console.log('After marriage;', jessicaCopy); */
+
+// - - - - - - - - - - - - - - - - - XXX - - - - - - - - - - - - - - - - - 
