@@ -367,7 +367,7 @@ console.log(restaurant.name);
 
 // - - - - - - - - - - - - - - - - - REST PATTERNS AND PARAMETERS - - - - - - - - - - - - - - - - - 
 
-const restaurant = {
+/* const restaurant = {
     name: 'Clasico Italiano',
     locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
     categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
@@ -423,8 +423,8 @@ console.log(weekdays);
 // 2)Functions
 
 const add = (...numbers) => {
-    /*  let total = numbers.reduce((acc, curr) => acc += curr)
-     console.log(total); */
+     //let total = numbers.reduce((acc, curr) => acc += curr)
+     //console.log(total);
 
     let total = 0;
     for (let i = 0; i < numbers.length; i++) {
@@ -446,3 +446,83 @@ restaurant.orderPizza('spinash')
 
 let makeSmall = 'REST PATTERNS AND PARAMETERS'
 console.log(makeSmall.toLowerCase());
+ */
+
+// - - - - - - - - - - - - - - - - - SHORT CIRCUITING (&& AND ||) - - - - - - - - - - - - - - - - - 
+
+const restaurant = {
+    name: 'Clasico Italiano',
+    locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
+    starterMenu: ['Foccacia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+    openingHours: {
+        thursday: {
+            open: 12,
+            close: 22,
+        },
+        friday: {
+            open: 11,
+            close: 23,
+        },
+        saturday: {
+            open: 0,
+            close: 24,
+        }
+    },
+
+    order: function (starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    },
+
+    orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+    },
+
+    orderPasta: function (x, y, z) {
+        console.log(`Here is your pasta with ${x}, ${y} and ${z}.`);
+    },
+
+    orderPizza: function (mainIngredient, ...otherIngredient) {
+        console.log(mainIngredient);
+        console.log(otherIngredient);
+    }
+};
+
+console.log('- - - - OR - - - -');
+//Use any data type, return ANY data type, short-circuiting 
+//If the first operan is a thruthy value then other operand will be ignored
+console.log(3 || 'Jonas');
+
+//OR operand, if the first value is true it won't check the other values
+console.log(undefined || 0 || '' || 'Hello' || 23 || null); //Hello it is the first thruthy value!
+
+//Example 1
+restaurant.numGuest = 23;
+const guest1 = restaurant.numGuest ? restaurant.numGuest : 10;
+console.log(guest1);
+
+
+//Example 2
+const guest2 = restaurant.numGuest || 10;
+console.log(guest2);
+
+
+console.log('- - - - AND - - - -');
+
+//Example 3
+console.log(0 && 'Jonas');
+console.log(7 && 'Jonas');
+
+console.log('Hello' && 23 && null && 'Jonas');
+
+//Example 4   (Practical example)
+if(restaurant.orderPizza){
+    restaurant.orderPizza('mushrooms', 'spinach')
+}
+
+restaurant.orderPizza && restaurant.orderPizza('hello', 'world')
+
+let x = 'SHORT CIRCUITING (&& AND ||)'
+console.log(x.toLowerCase());
