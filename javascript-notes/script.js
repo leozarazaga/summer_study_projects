@@ -920,12 +920,70 @@ console.log(nonExistingCity);
 
 const greet = (name) => {
     console.log(`Hello, ${name}!`);
-  };
+};
 
-  const name = 'Alice';
-  greet?.(name)
+const name = 'Alice';
+greet?.(name)
 
-const goodbye = goodbye?.('Anna') ?? 'Fuction does not exist!'
+const goodbye = undefined;
+goodbye?.("Malin")
 console.log(goodbye);
 
-  
+
+// 5) Access properties of an object within an array using optional chaining:
+const users = [
+    { id: 1, name: 'Alice', email: 'alice@example.com' },
+    { id: 2, name: 'Bob', email: 'bob@example.com' },
+    { id: 3, name: 'Charlie' }
+];
+
+let email = users[1]?.email ?? 'No email found!'
+console.log(email);
+
+let nonExistingEmail = users[3]?.email ?? 'Email does not exist!';
+console.log(nonExistingEmail);
+
+
+
+// 6) Access the title of the fiction book using optional chaining:
+
+const person = {
+    books: function () {
+        return {
+            fiction: {
+                title: 'The Great Gatsby',
+                author: 'F. Scott Fitzgerald'
+            },
+            nonFiction: {
+                title: 'Sapiens: A Brief History of Humankind',
+                author: 'Yuval Noah Harari'
+            },
+            fantasy: {
+                title: 'Harry Potter and the Sorcerer\'s Stone',
+                author: 'J.K. Rowling'
+            }
+        };
+    },
+    friends: function () {
+        return ['Alice', 'Bob', 'Charlie'];
+    }
+};
+
+
+const {nonFiction: {title: sapies}} = person.books();
+console.log(sapies);
+
+// 7) Access the author of the fantasy book using optional chaining:
+
+let author = person.books()?.fantasy?.author;
+console.log(author);
+
+// 8) Access the second friend using optional chaining:
+
+let friend = person.friends()?.[1]
+console.log(friend);
+
+
+
+
+// - - - - - - - - - - - - - - - - - EXERCISES - - - - - - - - - - - - - - - - - 
