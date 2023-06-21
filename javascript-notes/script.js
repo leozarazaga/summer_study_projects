@@ -292,7 +292,7 @@ restaurant.orderDelivery({
 
 // - - - - - - - - - - - - - - - - - SPREAD OPERATOR - - - - - - - - - - - - - - - - - 
 
-const restaurant = {
+/* const restaurant = {
     name: 'Clasico Italiano',
     locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
     categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
@@ -362,3 +362,87 @@ restaurant.name = "Ristorante Milano";
 
 console.log(restaurantCopy.name);
 console.log(restaurant.name);
+ */
+
+
+// - - - - - - - - - - - - - - - - - REST PATTERNS AND PARAMETERS - - - - - - - - - - - - - - - - - 
+
+const restaurant = {
+    name: 'Clasico Italiano',
+    locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
+    starterMenu: ['Foccacia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+    openingHours: {
+        thursday: {
+            open: 12,
+            close: 22,
+        },
+        friday: {
+            open: 11,
+            close: 23,
+        },
+        saturday: {
+            open: 0,
+            close: 24,
+        }
+    },
+
+    order: function (starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    },
+
+    orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+    },
+
+    orderPasta: function (x, y, z) {
+        console.log(`Here is your pasta with ${x}, ${y} and ${z}.`);
+    },
+
+    orderPizza: function(mainIngredient, ...otherIngredient){
+        console.log(mainIngredient);
+        console.log(otherIngredient);
+    }
+}
+
+// 1) Destructuring
+
+const arr = [1, 2, ...[3, 4]];
+console.log(arr);
+
+//REST, because on the LEFT side of =
+const [pizza, , risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(pizza, risotto, otherFood);
+
+//Objects
+const { saturday, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+
+// 2)Functions
+
+const add = (...numbers) => {
+    /*  let total = numbers.reduce((acc, curr) => acc += curr)
+     console.log(total); */
+
+    let total = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        total += numbers[i];
+    }
+    console.log(total);
+}
+
+add(2, 3);
+add(1, 2, 3, 4, 5);
+
+//Example 1
+const x = [23, 5, 7];
+add(...x);
+
+//Example 2
+restaurant.orderPizza('mushroom', 'ham', 'pineapple', 'bananas')
+restaurant.orderPizza('spinash')
+
+let makeSmall = 'REST PATTERNS AND PARAMETERS'
+console.log(makeSmall.toLowerCase());
