@@ -528,7 +528,7 @@ let x = 'SHORT CIRCUITING (&& AND ||)'
 console.log(x.toLowerCase());
  */
 
-// - - - - - - - - - - - - - - - - - THE NULISH COALESCING OPERATOR (??) - - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - THE NULLISH COALESCING OPERATOR (??) - - - - - - - - - - - - - - - - - 
 
 
 /* const restaurant = {
@@ -702,4 +702,230 @@ team1 < team2 && console.log("Team 1 is more likely to win");
  */
 
 
+
 // - - - - - - - - - - - - - - - - - LOOPING ARRAYS: THE FOR-OF LOOP - - - - - - - - - - - - - - - - - 
+/* 
+const restaurant = {
+    name: 'Clasico Italiano',
+    locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
+    starterMenu: ['Foccacia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+    openingHours: {
+        thursday: {
+            open: 12,
+            close: 22,
+        },
+        friday: {
+            open: 11,
+            close: 23,
+        },
+        saturday: {
+            open: 0,
+            close: 24,
+        }
+    },
+
+    order: function (starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    },
+
+    orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+    },
+
+    orderPasta: function (x, y, z) {
+        console.log(`Here is your pasta with ${x}, ${y} and ${z}.`);
+    },
+
+    orderPizza: function (mainIngredient, ...otherIngredient) {
+        console.log(mainIngredient);
+        console.log(otherIngredient);
+    }
+};
+
+//Example 1
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu]
+//console.log(menu);
+
+for (let item of menu) {
+    // console.log(item);
+}
+
+//Example 2
+for (let item of menu.entries()) {
+    //console.log(`${item[0] + 1}: ${item[1]}`);
+}
+
+//Destructuring the Array
+for (let [item, element] of menu.entries()) {
+    console.log(`${item + 1}: ${element}`);
+}
+ */
+
+
+// - - - - - - - - - - - - - - - - - ENHANCED OBJECTS LITERALS - - - - - - - - - - - - - - - - - 
+/* 
+const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+const openingHours = {
+    thursday: {
+        open: 12,
+        close: 22,
+    },
+    friday: {
+        open: 11,
+        close: 23,
+    },
+    saturday: {
+        open: 0,
+        close: 24,
+    }
+};
+
+
+const restaurant = {
+    name: 'Clasico Italiano',
+    locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
+    starterMenu: ['Foccacia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+    //ES6 enhanced object literals
+    openingHours,
+
+    //ES6 Methods, get rid of the function text
+    order(starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    },
+
+    orderDelivery({ starterIndex, mainIndex, time, address }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+    },
+
+    orderPasta(x, y, z) {
+        console.log(`Here is your pasta with ${x}, ${y} and ${z}.`);
+    },
+
+    orderPizza(mainIngredient, ...otherIngredient) {
+        console.log(mainIngredient);
+        console.log(otherIngredient);
+    },
+};
+
+// - - - - - - - - - - - - - - - - - OPTIONAL CHAINING (?) - - - - - - - - - - - - - - - - - 
+
+if(restaurant.openingHours && restaurant.openingHours.mon){
+    console.log(restaurant.openingHours.mon.open);
+}
+
+//With optional chaining
+console.log(restaurant.openingHours.monday?.open);
+console.log(restaurant.openingHours?.monday?.open);
+
+//Example
+
+const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+for(let i of days){
+    let open = restaurant.openingHours[i]?.open ?? 'closed' 
+    console.log(`On ${i}, we open at ${open}`);
+};
+
+//Methods
+console.log(restaurant.order?.(0, 1) ?? 'Methos does not exist')
+
+//Method does not exsist
+console.log(restaurant.orderRissoto?.(0, 1) ?? 'Method does not exist!');
+
+//Arrays
+const users = [{
+    name: 'Jonas', 
+    email: 'hello123@gmail.com',
+}
+];
+
+//const users = []
+
+//     optional chaining   Nullish Coalescing  
+//console.log(users[0]?.name ?? 'User array empty!');
+
+
+//Using the logical operator will be:
+if(users.length > 0){
+    console.log(users[0].name);
+} else{
+    console.log('User array empty!');
+} */
+
+
+// - - - - - - - - - - - - - - - - - EXERCISES - - - - - - - - - - - - - - - - - 
+
+/*
+// 1) Check if an object has a deeply nested property and return its value:
+
+ const data = {
+    user: {
+        name: 'Alice',
+        address: {
+            street: '123 Main St',
+            city: 'New York',
+            country: 'USA'
+        }
+    }
+};
+
+let country = data?.user?.address?.country ?? 'Country does not exit!'
+console.log(country);
+
+let state = data?.user?.address?.state ?? 'non-existent!'
+console.log(state); */
+
+
+
+// 2) Access a method on an object using optional chaining:
+const calculator = {
+    add: (a, b) => a + b,
+    multiply: (a, b) => a * b
+};
+
+let sum = calculator.add?.(5, 3) ?? 'Function does not exist!'
+console.log(sum);
+
+let divide = calculator.divide?.(10, 5) ?? 'Divide function does not exist!'
+console.log(divide);
+
+
+
+// 3) Access array elements and their properties using optional chaining:
+const data = [
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Alice', address: { city: 'New York' } },
+    { id: 3, name: 'Bob', address: { city: 'London' } }
+];
+
+
+// const [, { address: { city } }] = data;
+// console.log(city);
+
+let city = data[1]?.address?.city ?? 'City does not exist!';
+console.log(city);
+
+let nonExistingCity = data[4]?.address.city ?? 'Such city does not exist!';
+console.log(nonExistingCity);
+
+
+// 4) Check if a function exists and invoke it with optional chaining:
+
+const greet = (name) => {
+    console.log(`Hello, ${name}!`);
+  };
+
+  const name = 'Alice';
+  greet?.(name)
+
+const goodbye = goodbye?.('Anna') ?? 'Fuction does not exist!'
+console.log(goodbye);
+
+  
