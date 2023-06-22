@@ -992,7 +992,7 @@ console.log(friend);
 
 
 // - - - - - - - - - - - - - - - - - LOOPING OBJECTS - - - - - - - - - - - - - - - - - 
-
+/* 
 const openingHours = {
     thursday: {
         open: 12,
@@ -1102,11 +1102,34 @@ const game = {
         x: 3.25,
         team2: 6.5,
     },
+
 };
 
 
 // 1)
-
 for (let [i, player] of game.scored.entries()) {
-    console.log(`Goal ${i+1}: by ${player} `);
+    // console.log(`Goal ${i + 1}: by ${player} `);
 }
+
+
+// 2) Calculate the average in the odds object
+
+// let average = 0; 
+// let odd = Object.values(game.odds)
+
+// for(let key of odd){
+// average += key / odd.length
+// }
+// console.log(average.toFixed(2));
+
+
+// 3) Print the team and the odd
+for(let [key, odd] of Object.entries(game.odds)){
+    const teamStr = (key === 'x') ? 'draw' : `victory ${game[key]}`
+    console.log(`Odd of ${teamStr} : ${odd}`);
+} */
+
+
+
+// - - - - - - - - - - - - - - - - - SETS  AND MAPS- - - - - - - - - - - - - - - - - 
+
