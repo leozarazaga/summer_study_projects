@@ -885,7 +885,7 @@ console.log(state); */
 
 
 // 2) Access a method on an object using optional chaining:
-const calculator = {
+/* const calculator = {
     add: (a, b) => a + b,
     multiply: (a, b) => a * b
 };
@@ -970,8 +970,13 @@ const person = {
 };
 
 
-const {nonFiction: {title: sapies}} = person.books();
-console.log(sapies);
+//Destructuring objects
+const {nonFiction: {title: sapiens}} = person.books();
+console.log(sapiens);
+
+//Optional chaining
+let sapiens = person.books()?.nonFiction?.title
+console.log(sapiens);
 
 // 7) Access the author of the fantasy book using optional chaining:
 
@@ -983,7 +988,125 @@ console.log(author);
 let friend = person.friends()?.[1]
 console.log(friend);
 
+ */
 
 
+// - - - - - - - - - - - - - - - - - LOOPING OBJECTS - - - - - - - - - - - - - - - - - 
 
-// - - - - - - - - - - - - - - - - - EXERCISES - - - - - - - - - - - - - - - - - 
+const openingHours = {
+    thursday: {
+        open: 12,
+        close: 22,
+    },
+    friday: {
+        open: 11,
+        close: 23,
+    },
+    saturday: {
+        open: 0,
+        close: 24,
+    }
+};
+
+
+const restaurant = {
+    name: 'Clasico Italiano',
+    locationn: 'Via Angelo Tavanti 23, Firenze, Italy',
+    categories: ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'],
+    starterMenu: ['Foccacia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+    order: function (starterIndex, mainIndex) {
+        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    },
+
+    orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+    },
+
+    orderPasta: function (x, y, z) {
+        console.log(`Here is your pasta with ${x}, ${y} and ${z}.`);
+    },
+
+    orderPizza: function (mainIngredient, ...otherIngredient) {
+        console.log(mainIngredient);
+        console.log(otherIngredient);
+    }
+};
+
+//Property NAMES
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openStr = `We are open on ${properties.length} day: `
+
+for (const day of properties) {
+    openStr += `${day}, `
+}
+// console.log(openStr);
+
+
+//Property VALUES
+const values = Object.values(openingHours)
+// console.log(values);
+
+
+//Property ENTRIES
+const entries = Object.entries(openingHours)
+// console.log(entries);
+
+for (const [day, { open, close }] of entries) {
+    console.log(`On ${day} we open at ${open} and close at ${close}`);
+}
+
+
+// - - - - - - - - - - - - - - - - - LOOPING OBJECTS - - - - - - - - - - - - - - - - - 
+
+
+const game = {
+    team1: 'Bayern Munich',
+    team2: 'Borrussia Dortmund',
+    players: [
+        [
+            'Neuer',
+            'Pavard',
+            'Martinez',
+            'Alaba',
+            'Davies',
+            'Kimmich',
+            'Goretzka',
+            'Coman',
+            'Muller',
+            'Gnarby',
+            'Lewandowski',
+        ],
+        [
+            'Burki',
+            'Schulz',
+            'Hummels',
+            'Akanji',
+            'Hakimi',
+            'Weigl',
+            'Witsel',
+            'Hazard',
+            'Brandt',
+            'Sancho',
+            'Gotze',
+        ],
+    ],
+    score: '4:0',
+    scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+    date: 'Nov 9th, 2037',
+    odds: {
+        team1: 1.33,
+        x: 3.25,
+        team2: 6.5,
+    },
+};
+
+
+// 1)
+
+for (let [i, player] of game.scored.entries()) {
+    console.log(`Goal ${i+1}: by ${player} `);
+}
