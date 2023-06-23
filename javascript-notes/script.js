@@ -1208,3 +1208,20 @@ transformer('JavaScript is the best!', uppFirstWord)
 
  */
 
+// - - - - - - - - - - - - - - - - - LATE NIGHT STUDY- - - - - - - - - - - - - - - - - 
+
+//greet
+//name of the person
+// greeterHey
+
+let greet = (greeting) => {
+    return function (name) {
+        console.log(`${greeting} ${name}`);
+    }
+}
+
+let displayGreet = greet('Hello');
+displayGreet('John')
+
+
+
