@@ -1131,5 +1131,59 @@ for(let [key, odd] of Object.entries(game.odds)){
 
 
 
-// - - - - - - - - - - - - - - - - - SETS  AND MAPS- - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - FUCTIONS: DEFAULT PARAMETERS- - - - - - - - - - - - - - - - - 
+
+/* const bookings = []
+
+const createBooking = (flightNum = 1, numPassenger = 10, price = 199) => {
+    const booking = {
+        flightNum,
+        numPassenger,
+        price,
+    }
+    console.log(booking);
+    bookings.push(booking)
+}
+
+createBooking('LH123')
+createBooking('LH123', 2, 800);
+ */
+
+// - - - - - - - - - - - - - - - - - HOW PASSING ARGUMENTS WORKS: VALUE VS REFERENCE - - - - - - - - - - - - - - - - - 
+
+/* 
+const flight = "LH234";
+const jonas = {
+    name: 'Jonas Connor',
+    passport: 12345678,
+}
+
+const checkIn = (flightNum, passenger) => {
+    flightNum = 'LG999';
+    passenger.name = 'Mr.' + passenger.name
+
+    if (passenger.passport === 12345678) {
+        console.log('CHECKED IN!');
+    } else {
+        console.log('Wrong passport!');
+    }
+}
+
+// checkIn(flight, jonas)
+// console.log(flight);
+// console.log(jonas);
+
+
+const newPassport = (person) => {
+person.passport = Math.trunc(Math.random() *  1000000)
+}
+newPassport(jonas)
+checkIn(flight, jonas)
+
+//Passing by VALUES
+//Passiing by REFERENCE ⛔️ Does not work in JavaScript only on C++! */
+
+
+
+// - - - - - - - - - - - - - - - - - FIRST CLASS AND HIGHER ORDER FUNCTIONS - - - - - - - - - - - - - - - - - 
 
