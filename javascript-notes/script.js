@@ -1187,3 +1187,24 @@ checkIn(flight, jonas)
 
 // - - - - - - - - - - - - - - - - - FIRST CLASS AND HIGHER ORDER FUNCTIONS - - - - - - - - - - - - - - - - - 
 
+/*  const oneWord = (str) => {
+    return str.replace(/ /g, '').toLowerCase();
+};
+
+const uppFirstWord = (str) => {
+    const [first, ...others] = str.split(' ');
+    return [first.toUpperCase(), ...others].join(' ');
+};
+
+//Higer-order function
+const transformer = (str, fn) => {
+    console.log(`Original string: ${str}`);
+    console.log(`Transformed string: ${fn(str)}`);
+
+    console.log(`Trasformed by: ${fn.name}`);
+};
+
+transformer('JavaScript is the best!', uppFirstWord) 
+
+ */
+
