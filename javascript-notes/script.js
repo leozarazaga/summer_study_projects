@@ -1208,20 +1208,119 @@ transformer('JavaScript is the best!', uppFirstWord)
 
  */
 
-// - - - - - - - - - - - - - - - - - LATE NIGHT STUDY- - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - - - RETURNING FUNCTIONS- - - - - - - - - - - - - - - - - 
 
 //greet
 //name of the person
 // greeterHey
 
-let greet = (greeting) => {
-    return function (name) {
-        console.log(`${greeting} ${name}`);
+
+// const firstname = (name) => {
+//      return function(lastname){
+//         console.log(`${name} ${lastname}`);
+//     }
+// }
+
+// let fullname = firstname('Nicole')
+// fullname('Kidman')
+
+// //All in one go
+
+// firstname('John')('Connor')
+
+// const transformers = (name) => (lastname) => console.log(`${name} ${lastname}`);
+// transformers("Optimus")('Prime')
+
+// - - - - - - - - - - - - - - - - - The call and Apply Method- - - - - - - - - - - - - - - - - 
+
+/* const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    book(flightNumber, passengerName) {
+        console.log(`${passengerName} booked a sit on ${this.airline}. \nFlight: ${this.iataCode}: ${flightNumber}`);
+        this.bookings.push({
+            flight: `${this.iataCode}: ${flightNumber}, ${passengerName}`
+        })
     }
 }
 
-let displayGreet = greet('Hello');
-displayGreet('John')
+lufthansa?.book('123', 'Jonas')
+lufthansa?.book(635, 'Mike Smith')
+console.log(lufthansa);
+
+const eurowings = {
+    airline: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
+}
+
+const book = lufthansa.book;
+
+//Does not work!
+// book(23, 'Sarah Connor')
 
 
+//CALL METHOD
+book.call(eurowings, 23, 'Sarah Connor')
+console.log(eurowings);
 
+book.call(lufthansa, 239, 'Mary Cooper')
+console.log(lufthansa);
+
+//APPLY METHOD
+const flightData = [345, 'George Cooper'];
+book.apply(eurowings, flightData)
+console.log(eurowings);
+
+//BIND METHOD
+const bookEW = book.bind(eurowings)
+const bookLH = book.bind(lufthansa)
+bookEW(23, 'Steve Williams')
+bookLH('999', 'Sofia Orlando')
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Maria Jonsson')
+bookEW23('Martha Wayne')
+
+//With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function(){
+
+    console.log(this);
+
+    this.planes++
+    console.log(this.planes);
+}
+ */
+// - - - - - - - - - - - - - - - - - CLOSURES   - - - - - - - - - - - - - - - - - 
+
+//Example 1
+function createCounterBox() {
+    let counter = 0; // This is the counter variable that we want to keep track of
+    
+    function increaseCounter() {
+      counter = counter + 1; // When you press the button, we increase the counter by 1
+      console.log('Counter:', counter); // Show the current count on the screen
+    }
+    
+    return increaseCounter; // Return the button function so you can use it later
+  }
+  
+  let firstCounterBox = createCounterBox(); // Get the first counter box
+  let secondCounterBox = createCounterBox(); // Get the second counter box
+  
+  firstCounterBox(); // Output: Counter: 1
+  firstCounterBox(); // Output: Counter: 2
+  secondCounterBox(); // Output: Counter: 1
+  
+
+//Example 2
+  function fullname(firstname){
+    return function(lastname){
+        console.log(`${firstname} ${lastname}`);
+    }
+  }
+
+  let displayName = fullname('John')
+  displayName('Connor')
