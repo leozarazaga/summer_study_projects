@@ -1295,32 +1295,165 @@ lufthansa.buyPlane = function(){
  */
 // - - - - - - - - - - - - - - - - - CLOSURES   - - - - - - - - - - - - - - - - - 
 
-//Example 1
+/* //Example 1
 function createCounterBox() {
     let counter = 0; // This is the counter variable that we want to keep track of
-    
+
     function increaseCounter() {
-      counter = counter + 1; // When you press the button, we increase the counter by 1
-      console.log('Counter:', counter); // Show the current count on the screen
+        counter = counter + 1; // When you press the button, we increase the counter by 1
+        console.log('Counter:', counter); // Show the current count on the screen
     }
-    
+
     return increaseCounter; // Return the button function so you can use it later
-  }
-  
-  let firstCounterBox = createCounterBox(); // Get the first counter box
-  let secondCounterBox = createCounterBox(); // Get the second counter box
-  
-  firstCounterBox(); // Output: Counter: 1
-  firstCounterBox(); // Output: Counter: 2
-  secondCounterBox(); // Output: Counter: 1
-  
+}
+
+let firstCounterBox = createCounterBox(); // Get the first counter box
+let secondCounterBox = createCounterBox(); // Get the second counter box
+
+firstCounterBox();
+firstCounterBox();
+secondCounterBox();
+
 
 //Example 2
-  function fullname(firstname){
-    return function(lastname){
+function fullname(firstname) {
+    return function (lastname) {
         console.log(`${firstname} ${lastname}`);
     }
-  }
+}
 
-  let displayName = fullname('John')
-  displayName('Connor')
+let displayName = fullname('John')
+displayName('Connor')
+ */
+
+// - - - - - - - - - - - - - - - - - ARRAYS   - - - - - - - - - - - - - - - - - 
+
+/* 
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+//SLICE
+console.log(arr.slice(2));
+console.log(arr.slice(2, 4));
+console.log(arr.slice(-2));
+console.log(arr.slice(-1));
+console.log(arr.slice(1, -1));
+console.log(arr.slice());
+
+
+//SPLICE
+// console.log(arr.splice(2));
+console.log(arr.splice(-1))
+console.log(arr);
+
+
+//REVERSE
+arr = ['a', 'b', 'c', 'd', 'e'];
+
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+console.log(arr2);
+
+
+//CONCAT
+const letter = arr.concat(arr2)
+console.log(letter);
+console.log([...arr, ...arr2]); //Same thing with the spread 
+
+
+//JOIN
+console.log(letter.join(' - '));
+
+let people = ['Anna', 'John', 'Carlos', 'Lina'];
+
+//SHIFT & UNSHIFT
+people.shift()
+people.unshift('Kimberly', 'Rebecca')
+people.unshift('Anna')
+people.shift()
+
+console.log(people);
+
+
+//The new AT method in 2022
+const array = [23, 11, 64];
+console.log(array[0]);
+console.log(array.at(0));
+
+//Getting the last element
+console.log(array[array.length - 1]);
+console.log(array.slice(-1)[0]);
+
+//AT method
+console.log(array.at(-1));
+
+console.log('jonas'.at(-1));
+
+ */
+
+
+// - - - - - - - - - - - - - - - - - ARRAYS - - - - - - - - - - - - - - - - - 
+
+//Looping over
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+for(let key of movements){
+  if(key >= 0){
+    console.log(`You deposited ${key}`);
+  } else{
+    console.log(`You withdrew ${Math.abs(key)}`);
+
+  }
+}  */
+
+
+
+//Looping the index with the ENTRIES method!
+
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+for (let [i, movement] of movements.entries()) {
+    if (movement >= 0) {
+        console.log(`Movement ${i + 1}: You deposited ${movement}`);
+    } else {
+        console.log(`Movement ${i +1}: You withdrew ${Math.abs(movement)}`);
+
+    }
+}
+ */
+
+// //FOREACH
+// movements.forEach((values) => {
+//     if (values >= 0) {
+//         console.log(`${values} is positive!`);
+//     }
+//     else {
+//         console.log(`${Math.abs(values)} is negative!`);
+//     }
+// })
+
+
+/* //With the INDEX
+console.log("- - - - - - -");
+movements.forEach((values, index) => {
+    if (values >= 0) {
+        console.log(`Movement ${index + 1}: You deposindexted ${values}`);
+    }
+    else {
+        console.log(`Movement ${index +1}: You withdrew ${Math.abs(values)}`);
+    }
+})
+
+
+// //RANDOM METHODS: Sum the values
+// let num = [1, 2, 3, 4, 5];
+// let total = 0;
+
+// //forEach
+// num.forEach((value) => total += value)
+// console.log(total);
+
+// //reduce
+// console.log(num.reduce((acc, curr) => acc + curr))
+ */
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
