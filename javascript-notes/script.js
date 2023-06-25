@@ -1456,4 +1456,60 @@ movements.forEach((values, index) => {
 // console.log(num.reduce((acc, curr) => acc + curr))
  */
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// - - - - - - - - - - - - - - - FOREACH WITH MAPS AND SETS - - - - - - - - - - - - - - - - - - - 
+
+/* //MAP
+const currencies = new Map([
+    ['USD', 'United States dollar'],
+    ['EUR', 'Euro'],
+    ['GBP', 'Pound sterling'],
+  ]);
+
+
+  currencies.forEach((value, key) =>{
+    console.log(key +': '+ value);
+  })
+
+//SET
+
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR'])
+console.log(currenciesUnique);
+
+currenciesUnique.forEach((value, key) =>{
+    console.log(`${key}: ${value} `);
+}) */
+
+
+// - - - - - - - - - - - - - - - EXERCISES - - - - - - - - - - - - - - - - - - - 
+
+/* 
+// Test Data 1
+// 1) Julia's data [3, 5, 2, 12, 7]
+// 2) Kate's data [4, 1, 15, 8, 3]
+
+// Test Data 2
+// 1) Julia's data [9, 16, 6, 8, 3]
+// 2) Kate's data [10, 5, 6, 1, 4]
+
+let checkDogs = (dogsJulia, dogsKate) => {
+    const dogsJuliaCorrected = dogsJulia.slice(); // Creating a shallow copy
+    dogsJuliaCorrected.splice(0, 1);
+    dogsJuliaCorrected.splice(-2);
+  
+    const dogs = dogsJuliaCorrected.concat(dogsKate);
+    console.log(dogs);
+  
+    dogs.forEach((value, i) => {
+      if (value >= 3) {
+        console.log(`Dog number ${i + 1} is an adult, and is ${value} years.`);
+      }
+      else {
+        console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+      }
+    })
+  }
+  
+  // checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3])
+  checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4])
+  
+*/
