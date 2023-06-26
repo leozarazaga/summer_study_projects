@@ -76,13 +76,62 @@ const displayMovement = (movements) => {
 
 displayMovement(account1.movements)
 
+
+//Calculating the balance
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, curr) => acc + curr, 0)
+
+  labelBalance.textContent = `${balance}€`
+}
+
+calcDisplayBalance(account1.movements)
+
+
 //Creating usernames
 const createUsernames = (accs) => {
   accs.forEach((acc) => acc.username = acc.owner.toLowerCase().split(' ').map((name) => name[0]).join(''));
 }
 
 createUsernames(accounts)
-console.log(accounts);
+// console.log(accounts);
+
+
+
+//Exercises
+/* 
+Test Data 1: [5, 2, 4, 1, 15, 8, 3];
+Test Data 2: [16, 6, 10, 5, 6, 1, 4]
+
+Dog <= 2 : humanAge = 2 * dogAge
+Dog > 2 : humanage = 16 + dogAge * 4; 
+*/
+
+let testData = [5, 2, 4, 1, 15, 8, 3];
+
+//1)
+// testData.map((dogAge, i) => {
+//   if (dogAge <= 2) {
+//     console.log(`Dog ${i + 1} is ${2 * dogAge} human-years`);
+//   } else {
+//     console.log(`Dog ${i + 1} is ${16 + (dogAge * 4)} human-years`);
+//   }
+// })
+
+
+const calcAverageHumanAge = (ages) => {
+  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+  const adults = humanAges.filter((age) => age >= 18)
+  const average = adults.reduce((acc, curr) => acc + curr, 0) / adults.length
+
+
+  console.log(average);
+  console.log(humanAges);
+  console.log(adults);
+
+  
+}
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])
+calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4])
 
 
 
