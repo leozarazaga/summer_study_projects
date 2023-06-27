@@ -67,24 +67,41 @@ const displayMovement = (movements) => {
     const html = `
         <div class="movements__row">
            <div class="movements__type movements__type--${type}"> ${i + 1} ${type} </div>
-            <div class="movements__value">${mov}</div>
+            <div class="movements__value">${mov}€</div>
         </div>
         `;
     containerMovements.insertAdjacentHTML('afterbegin', html)
   });
 }
 
-displayMovement(account1.movements)
+
 
 
 //Calculating the balance
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, curr) => acc + curr, 0)
-
   labelBalance.textContent = `${balance}€`
+
 }
 
-calcDisplayBalance(account1.movements)
+
+
+//Display Summary
+const calcDisplaySumary = (acc) => {
+  const incomes = acc.movements.filter((mov) => mov > 0).reduce((acc, curr) => acc + curr);
+  labelSumIn.textContent = `${incomes}€`
+
+  const outcome = acc.movements.filter((val) => val < 0).reduce((acc, curr) => acc + curr);
+  labelSumOut.textContent = `${Math.abs(outcome)}€`
+
+  const interest = acc.movements.filter((val) => val > 0).map((desposit) => desposit * acc.interestRate / 100).filter((interest, i, array) => {
+    // console.log(array);
+    return interest >= 1
+  }).reduce((acc, interest) => acc + interest, 0)
+  labelSumInterest.textContent = `${interest}€`
+
+}
+
 
 
 //Creating usernames
@@ -96,42 +113,35 @@ createUsernames(accounts)
 // console.log(accounts);
 
 
+//Event handlers
+let currentAccount;
 
-//Exercises
-/* 
-Test Data 1: [5, 2, 4, 1, 15, 8, 3];
-Test Data 2: [16, 6, 10, 5, 6, 1, 4]
+btnLogin.addEventListener('click', (e) => {
+  //Prevent form from submitting
+  e.preventDefault();
 
-Dog <= 2 : humanAge = 2 * dogAge
-Dog > 2 : humanage = 16 + dogAge * 4; 
-*/
+  currentAccount = accounts.find((acc) => acc.username === inputLoginUsername.value)
+  console.log(currentAccount);
 
-let testData = [5, 2, 4, 1, 15, 8, 3];
+  if(currentAccount?.pin === Number(inputLoginPin.value)){
+    //Display UI and welcome message
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
+    containerApp.style.opacity = 100;
+    
+    //Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = ''
+    inputLoginPin.blur();
 
-//1)
-// testData.map((dogAge, i) => {
-//   if (dogAge <= 2) {
-//     console.log(`Dog ${i + 1} is ${2 * dogAge} human-years`);
-//   } else {
-//     console.log(`Dog ${i + 1} is ${16 + (dogAge * 4)} human-years`);
-//   }
-// })
+    //Display movements
+    displayMovement(currentAccount.movements)
+    
+    //Display balance
+    calcDisplayBalance(currentAccount.movements)
 
-
-const calcAverageHumanAge = (ages) => {
-  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4))
-  const adults = humanAges.filter((age) => age >= 18)
-  const average = adults.reduce((acc, curr) => acc + curr, 0) / adults.length
-
-
-  console.log(average);
-  console.log(humanAges);
-  console.log(adults);
-
-  
-}
-calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])
-calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4])
+    //Display summary
+    calcDisplaySumary(currentAccount)
+  }
+})
 
 
 
