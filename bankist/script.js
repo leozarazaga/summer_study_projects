@@ -3,7 +3,7 @@
 // DIFFERENT DATA! Contains movement dates, currency and locale
 
 const account1 = {
-  owner: 'Leo Schmedtmann',
+  owner: 'Jonas Schmedtmann',
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
   interestRate: 1.2, // %
   pin: 1111,
@@ -91,6 +91,12 @@ const formatMovementDate = (date, locale) => {
 
 }
 
+const formatCurrency = (value, locale, currency) => {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value)
+}
 
 const displayMovement = (acc, sort = false) => {
   containerMovements.innerHTML = ""
@@ -102,12 +108,13 @@ const displayMovement = (acc, sort = false) => {
     const date = new Date(acc.movementsDates[i])
     const displayDate = formatMovementDate(date, acc.locale)
 
+    const formattedMov = formatCurrency(mov, acc.locale, acc.currency)
 
     const html = `
         <div class="movements__row">
            <div class="movements__type movements__type--${type}"> ${i + 1} ${type} </div>
            <div class="movements__date">${displayDate}</div>
-            <div class="movements__value">${mov.toFixed(2)}€</div>
+            <div class="movements__value">${formattedMov}</div>
         </div>
         `;
     containerMovements.insertAdjacentHTML('afterbegin', html)
@@ -121,7 +128,7 @@ const displayMovement = (acc, sort = false) => {
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, curr) => acc + curr, 0)
 
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`
+  labelBalance.textContent = formatCurrency(acc.balance, acc.locale, acc.currency)
 
 }
 
@@ -130,16 +137,16 @@ const calcDisplayBalance = function (acc) {
 //Display Summary
 const calcDisplaySumary = (acc) => {
   const incomes = acc.movements.filter((mov) => mov > 0).reduce((acc, curr) => acc + curr);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`
+  labelSumIn.textContent = formatCurrency(incomes, acc.locale, acc.currency);
 
   const outcome = acc.movements.filter((val) => val < 0).reduce((acc, curr) => acc + curr);
-  labelSumOut.textContent = `${Math.abs(outcome).toFixed(2)}€`
+  labelSumOut.textContent = formatCurrency(Math.abs(outcome), acc.locale, acc.currency);
 
   const interest = acc.movements.filter((val) => val > 0).map((desposit) => desposit * acc.interestRate / 100).filter((interest, i, array) => {
     // console.log(array);
     return interest >= 1
   }).reduce((acc, interest) => acc + interest, 0)
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`
+  labelSumInterest.textContent = formatCurrency(interest, acc.locale, acc.currency);
 
 }
 
