@@ -76,7 +76,7 @@ const formatMovementDate = (date, locale) => {
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
+  // console.log(daysPassed);
 
   if (daysPassed === 0) return "Today";
   if (daysPassed === 1) return "Yesterday";
@@ -88,7 +88,6 @@ const formatMovementDate = (date, locale) => {
   // return `${day}/${month}/${year}`;
 
   return new Intl.DateTimeFormat(locale).format(date);
-
 }
 
 const formatCurrency = (value, locale, currency) => {
@@ -123,13 +122,11 @@ const displayMovement = (acc, sort = false) => {
 
 
 
-
 //Calculating the balance
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, curr) => acc + curr, 0)
 
   labelBalance.textContent = formatCurrency(acc.balance, acc.locale, acc.currency)
-
 }
 
 
@@ -147,7 +144,6 @@ const calcDisplaySumary = (acc) => {
     return interest >= 1
   }).reduce((acc, interest) => acc + interest, 0)
   labelSumInterest.textContent = formatCurrency(interest, acc.locale, acc.currency);
-
 }
 
 
@@ -173,15 +169,43 @@ const updateUI = (acc) => {
   calcDisplaySumary(acc)
 }
 
+const startLogOutTimer = () => {
+
+  const tick = () => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(Math.trunc(time % 60)).padStart(2, 0);
+
+    //In each call, print remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+
+    //When 0 seconds, stop time and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started'
+      containerApp.style.opacity = 0;
+    }
+    //Decrease 1 second
+    time--;
+  }
+  //Set time to 5min
+  let time = 120;
+
+  //Call the timer every second
+  tick()
+  const timer = setInterval(tick, 1000)
+  return timer;
+}
+
 
 //Event handlers
-let currentAccount;
+let currentAccount, timer;
+
 
 //FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount)
-containerApp.style.opacity = 100;
-
+// currentAccount = account1;
+// updateUI(currentAccount)
+// containerApp.style.opacity = 100;
 
 
 
@@ -211,7 +235,7 @@ btnLogin.addEventListener('click', (e) => {
     // const locale = navigator.language;
     // console.log(locale);
 
-    labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(now)
+    labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(now);
 
     // - - - VERSION 2 - - -
     // const now = new Date();
@@ -227,9 +251,14 @@ btnLogin.addEventListener('click', (e) => {
     inputLoginUsername.value = inputLoginPin.value = ''
     inputLoginPin.blur();
 
+    //Timer
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
     updateUI(currentAccount)
   }
 })
+
 
 //Transfering money
 btnTransfer.addEventListener('click', (e) => {
@@ -250,8 +279,13 @@ btnTransfer.addEventListener('click', (e) => {
 
     //Update UI
     updateUI(currentAccount)
+
+    // Reset timer
+    clearInterval(timer)
+    timer = startLogOutTimer();
   }
 })
+
 
 //Requiring loan
 btnLoan.addEventListener('click', (e) => {
@@ -259,20 +293,28 @@ btnLoan.addEventListener('click', (e) => {
 
   const amount = Math.floor(inputLoanAmount.value)
   if (amount > 0 && currentAccount.movements.some((move) => move >= amount * 0.1)) {
-    //Add movement
-    currentAccount.movements.push(amount)
 
-    //Add loan date
-    currentAccount.movementsDates.push(new Date().toISOString())
+    setTimeout(function () {
 
+      //Add movement
+      currentAccount.movements.push(amount)
 
-    //Update UI
-    updateUI(currentAccount)
+      //Add loan date
+      currentAccount.movementsDates.push(new Date().toISOString())
+
+      //Update UI
+      updateUI(currentAccount)
+
+      // Reset timer
+      clearInterval(timer)
+      timer = startLogOutTimer();
+
+    }, 2500);
   }
 
   inputLoanAmount.value = '';
-})
 
+})
 
 
 
