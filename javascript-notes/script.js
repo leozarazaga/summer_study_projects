@@ -1513,3 +1513,925 @@ let checkDogs = (dogsJulia, dogsKate) => {
   checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4])
   
 */
+
+
+// - - - - - - - - - - - - - - - EXERCISES - - - - - - - - - - - - - - - - - - - 
+
+
+/* 
+Test Data 1: [5, 2, 4, 1, 15, 8, 3];
+Test Data 2: [16, 6, 10, 5, 6, 1, 4]
+
+Dog <= 2 : humanAge = 2 * dogAge
+Dog > 2 : humanage = 16 + dogAge * 4; 
+*/
+
+//let testData = [5, 2, 4, 1, 15, 8, 3];
+
+// 1)
+// testData.map((dogAge, i) => {
+//     if (dogAge <= 2) {
+//         console.log(`Dog ${i + 1} is ${2 * dogAge} human-years`);
+//     } else {
+//         console.log(`Dog ${i + 1} is ${16 + (dogAge * 4)} human-years`);
+//     }
+// })
+
+
+// const calcAverageHumanAge = (ages) => {
+//     const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+//     const adults = humanAges.filter((age) => age >= 18)
+//     const average = adults.reduce((acc, curr) => acc + curr, 0) / adults.length
+
+
+//     console.log(average);
+//     console.log(humanAges);
+//     console.log(adults);
+// }
+
+// calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])
+// calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4])
+
+// 2) 
+//Only use by chaining methods
+// const calcAverageHumanAge = (ages) => {
+//     const humanAges = ages.map((age) => age <= 2 ? 2 * age : 16 + age * 4).filter((age) => age >= 18).reduce((acc, curr, index, array) => acc + curr / array.length, 0)
+//     console.log(humanAges);
+// }
+
+// calcAverageHumanAge(testData)
+
+
+// - - - - - - - - - - - - - - - PIPELINE/CHAINING METHODS - - - - - - - - - - - - - - - - - - - 
+
+
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+const eurToUsd = 1.1;
+//PIPELINE
+const totalDepositsUSD = movements.filter((mov) => mov > 0).map((mov) => mov * eurToUsd).reduce((acc, curr) => acc + curr, 0)
+
+console.log(totalDepositsUSD); */
+
+// - - - - - - - - - - - - - - - FLAT & FLATMAP - - - - - - - - - - - - - - - - - - - 
+
+
+/* //Flat
+const overallBalance = accounts.map((acc) => acc.movements).flat().reduce((acc, curr) => acc + curr, 0)
+console.log(overallBalance);
+
+//FlatMap
+const overallBalance2 = accounts.flatMap((acc) => acc.movements).reduce((acc, curr) => acc + curr, 0)
+console.log(overallBalance2); */
+
+
+// - - - - - - - - - - - - - - - SORTING ARRAYS- - - - - - - - - - - - - - - - - - - 
+
+
+//1.
+/* const bankDepositSum = accounts.flatMap((value) => value.movements).filter((val) => val > 0).reduce((acc, curr) => acc + curr, 0)
+
+console.log(bankDepositSum); */
+
+//2. 
+// const numDeposits1000 = accounts.flatMap((value) => value.movements).filter((value) => value >= 1000).length;
+// console.log(numDeposits1000); 
+
+//Reduce
+
+// const numDeposits1000 = accounts.flatMap((value) => value.movements).reduce((acc, curr) => curr >= 1000 ? acc + 1 : acc , 0)
+// console.log(numDeposits1000);
+
+// let a = 10; 
+// a++
+// console.log(a);
+
+//3.
+
+/* const {deposits, withdrawals} = accounts.flatMap((value) => value.movements).reduce((acc, curr) => {
+
+  curr > 0 ? ( acc.deposits += curr) : (acc.withdrawals += curr)
+  return acc;
+
+}, { deposits: 0, withdrawals: 0 })
+
+console.log(deposits, withdrawals); */
+
+
+//4. 
+
+/* const convertTitleCase = (title) => {
+const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and'];
+
+const titleCase = title.toLowerCase().split(' ').map((word) => exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join(' ')
+
+return titleCase
+}
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not to long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE')); */
+
+
+// - - - - - - - - - - - - - - - ARRAY METHODS IN PRACTICE - - - - - - - - - - - - - - - - - - - 
+
+
+/* 1)  Loop over the array containing dog objects, and for each dog, calculate the recommended food
+ portion and add it to the object as a new property. Do NOT create a new array, simply loop over the array.
+  Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+ */
+
+// const dogs = [
+//     { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+//     { weight: 8, curFood: 200, owners: ['Matilda'] },
+//     { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+//     { weight: 32, curFood: 340, owners: ['Michael'] }
+// ];
+
+
+// // 1)
+// dogs.forEach((dog) => dog.recommendedFood = Math.trunc(dog.weight ** 0.75 * 28));
+// console.log(dogs);
+
+// /* 
+//   2)  Find Sarah's dog and log to the console whether it's eating too much or too little.
+//       HINT: Some dogs have multiple owners, so you first need to find Sarah in the owners array, and so
+//       this one is a bit tricky (on purpose) 🤓
+// */
+
+// let sarahDog = dogs.find((dog) => dog.owners.includes('Sarah'));
+// console.log(`Sara's dogs is eating too ${sarahDog.curFood > sarahDog.recommendedFood ? 'much' : 'little'}.`);
+
+
+// /* 
+//   3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch')
+//      and an array with all owners of dogs who eat too little ('ownersEatTooLittle'). 
+// */
+
+// let ownersEatTooMuch = dogs.filter((value) => value.curFood > value.recommendedFood).flatMap((value) => value.owners)
+// console.log(ownersEatTooMuch);
+
+// let ownersEatTooLittle = dogs.filter((value) => value.curFood < value.recommendedFood).flatMap((value) => value.owners)
+// console.log(ownersEatTooLittle);
+
+// /* 
+// 4. Log a string to the console for each array created in 3., like this: 
+//    "Matilda, Sarah and John's dogs eat too much!" and "Alice, Bob and Michael's dogs eat too little!"
+// */
+
+// let eatTooMuch = ownersEatTooMuch.join(' and ');
+// let eatTooLess = ownersEatTooLittle.join(' and ');
+
+// console.log(`${eatTooMuch}'s dogs eat too much.`);
+// console.log(`${eatTooLess}'s dogs eat too little.`);
+
+
+// /* 
+//  5. Log to the console whether there is any dog eating EXACTLY the amount 
+//     of food that is recommended (just true or false)
+// */
+
+
+// console.log(dogs.some((value) => value.curFood === value.recommendedFood));
+
+// /* 
+//  6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
+// */
+
+// const checkEatingOkey = (dog) => dog.curFood > dog.recommendedFood * 0.9 && dog.curFood < dog.recommendedFood * 1.1;
+// let result = dogs.some(checkEatingOkey)
+// console.log(result);
+
+// /* 
+//     7. Create an array containing the dogs that are eating an OKAY amount of food
+//      (try to reuse the condition used in 6.)
+//  */
+
+// let eatingOkey = dogs.filter(checkEatingOkey)
+// console.log(eatingOkey)
+
+// /* 
+//     8. Create a shallow copy of the dogs array and sort it by recommended food portion in an 
+//     ascending order (keep in mind that the portions are inside the array's objects) 
+// */
+
+// const dogsSorted = dogs.slice().sort((a, b) => a.recommendedFood - b.recommendedFood);
+
+// console.log(dogsSorted);
+
+
+
+
+// - - - - - - - - - - - - - - - ARRAY METHODS IN PRACTICE - - - - - - - - - - - - - - - - - - - 
+
+
+
+
+//Array Destructuring
+// const { owners: [matilda] } = dogs.find(({owners}) => owners.includes('Matilda'))
+// console.log(matilda); 
+
+
+
+/* const dogs = [
+    { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+    { weight: 8, curFood: 200, owners: ['Matilda'] },
+    { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+    { weight: 32, curFood: 340, owners: ['Michael'] }
+];
+ */
+/*
+    1)  Loop over the array containing dog objects, and for each dog, calculate the recommended food
+        portion and add it to the object as a new property. Do NOT create a new array, simply loop over the array.
+        Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+ */
+
+
+
+/*
+  2)  Find Sarah's dog and log to the console whether it's eating too much or too little.
+      HINT: Some dogs have multiple owners, so you first need to find Sarah in the owners array, and so
+      this one is a bit tricky (on purpose) 🤓
+*/
+
+
+/* dogs.forEach((dog) => {
+    if (dog.owners.includes('Matilda')) {
+        dog.recommendedFood = Math.trunc(dog.weight ** 0.75 * 28);
+        const foodStatus = dog.recommendedFood > dog.curFood ? 'eating too much' : 'eating too little';
+        console.log(`${dog.owners.join(' and ')}'s dog is ${foodStatus}.`);
+    }
+}); */
+
+
+
+/*
+  3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch')
+     and an array with all owners of dogs who eat too little ('ownersEatTooLittle').
+*/
+
+
+
+/*
+4. Log a string to the console for each array created in 3., like this:
+   "Matilda, Sarah and John's dogs eat too much!" and "Alice, Bob and Michael's dogs eat too little!"
+*/
+
+
+
+/*
+ 5. Log to the console whether there is any dog eating EXACTLY the amount
+    of food that is recommended (just true or false)
+*/
+
+
+
+/*
+ 6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
+*/
+
+// HINT 2: Being within a range 10% above and below the recommended portion means:
+//  current > (recommended * 0.90) && current < (recommended * 1.10). 
+// Basically, the current portion should be between 90% and 110% of the recommended portion.
+
+
+// let checkEatingOkey = ((dog) => dog.curFood > (dog.recommendedFood * 0.90) && dog.curFood < (dog.recommendedFood * 1.10));
+
+
+
+/*
+    7. Create an array containing the dogs that are eating an OKAY amount of food
+     (try to reuse the condition used in 6.)
+ */
+
+
+
+/*
+    8. Create a shallow copy of the dogs array and sort it by recommended food portion in an
+    ascending order (keep in mind that the portions are inside the array's objects)
+*/
+
+
+
+
+// - - - - - - - - - - - - - - - (NUMBERS) - - - - - - - - - - - - - - - - - - - 
+
+/* console.log(23 === 23.0);
+
+//Conversions
+console.log(Number('23'));
+console.log(+"23");
+
+//Parsing
+console.log(Number.parseInt('30px'));
+
+console.log(Number.parseFloat('2.5rem'));
+
+//Checking if value is NAN
+console.log(Number.isNaN(20));
+console.log(Number.isNaN('20'));
+console.log(Number.isNaN(+'20px'));
+console.log(Number.isNaN(23 / 0));
+
+//Checking if value is a number
+console.log(Number.isFinite(20 / 0));
+console.log(Number.isFinite(10)); */
+
+// - - - - - - - - - - - - - - - DATE - - - - - - - - - - - - - - - - - - - 
+
+//Create date
+/* const now = new Date();
+console.log(now);
+
+console.log(new Date('December 24, 2015'));
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); */
+
+//Working with dates
+/* const future = new Date(2037, 10, 19, 15, 23)
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime());
+
+console.log(new Date(2142253380000));
+
+console.log(Date.now());
+future.setFullYear(2040)
+console.log(future); */
+
+//Calculating Dates
+
+/* const future = new Date(2037, 10, 19, 15, 23);
+console.log(Number(future));
+
+const calcDaysPassed = (date1, date2) => {
+    return Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+}
+
+const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14))
+console.log(days1); */
+
+
+/* const calcDates = (input1, input2) => {
+    const date1 = new Date(input1);
+    const date2 = new Date(input2);
+
+    const timeDifference = date2.getTime() - date1.getTime();
+    const daysDifference = Math.abs(timeDifference / (1000 * 60 * 60 * 24));
+    return daysDifference
+}
+
+console.log(calcDates('2023-06-30', '2023-07-25') + ' days');
+ */
+
+/* const now = new Date();
+const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+}
+
+const locale = 'sv-SE';
+
+const time = new Intl.DateTimeFormat(locale, options).format(now);
+console.log(time); */
+
+/*
+const num = 1234567.23;
+
+const options = {
+    style: 'currency',
+    unit: 'celsius',
+    currency: 'EUR',
+    // useGrouping: false
+}
+
+console.log('US: ', new Intl.NumberFormat('en-US', options).format(num));
+console.log('Sweden: ', new Intl.NumberFormat('sv-SE', options).format(num));
+console.log('Syria: ', new Intl.NumberFormat('ar-SY', options).format(num));
+
+ */
+
+
+
+// - - - - - - - - - - - - - - - SET TIMEOUT - - - - - - - - - - - - - - - - - - - 
+
+/* const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your Pizza with ${ing1} and ${ing2}🍕`), 2000, ...ingredients);
+
+console.log('Waiting...');
+
+if (ingredients.includes('spinach')) {
+    clearTimeout(pizzaTimer)
+} */
+
+// - - - - - - - - - - - - - - - SET INTERVAL - - - - - - - - - - - - - - - - - - - 
+
+/* setInterval(() =>{
+    const now = new Date();
+    console.log(now);
+}, 3001); */
+
+
+// - - - - - - - - - - - - - - - CREATING A CLOCK - - - - - - - - - - - - - - - - - - - 
+
+
+/* const clock = setInterval(() => {
+    const now = new Date();
+    const options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+    };
+
+    const time = new Intl.DateTimeFormat('sv-SE', options).format(now);
+    console.log(time);
+}, 1000); // 1000 milliseconds = 1 second
+
+ */
+
+//EXPERIMENTING
+/* const greeting = (name) => {
+    console.log(`Hello ${name}!`);
+};
+
+const clock = setTimeout(() => {
+    greeting('Anna');
+}, 2000) */
+
+// - - - - - - - - - - - - - - - CREATING AN ALARM - - - - - - - - - - - - - - - - - - - 
+
+/* let time;
+
+let tick = () => {
+    let min = String(Math.trunc(time / 60)).padStart(2, 0);
+    let sec = String(Math.trunc(time % 60)).padStart(2, 0);
+
+    console.log(`${min}:${sec}`);
+
+    if (time === 0) {
+        clearInterval(timer);
+        console.log('⏰');
+    }
+
+    time--;
+}
+
+time = 5;
+const timer = setInterval(tick, 1000);
+tick(); */
+
+
+// - - - - - - - - - - - - - - - OOP - - - - - - - - - - - - - - - - - - - 
+
+
+/* const Person = function (firstName, birthYear) {
+    //Instance properties
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+
+    //NEVER DO THIS!
+    // this.calcAge = function(){
+    //     console.log(2037-this.birthYear);
+    // }
+}
+
+const jonas = new Person('Jonas', 1991);
+console.log(jonas);
+
+
+// 1. New {} empty object is created!
+// 2. Functions is called, this = {}
+// 3. {} linked to a prototype
+// 4. function automatically return {}
+
+
+const matilda = new Person('Matilda', 1995)
+const jack = new Person('Jack', 2000)
+console.log(jack);
+console.log(matilda);
+
+console.log(jonas instanceof Person);
+
+
+//Prototypes    <- - - 
+console.log(Person.prototype);
+Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+}
+
+jonas.calcAge();
+matilda.calcAge();
+
+
+//Example
+Person.prototype.species = 'Homo Sapiesn'
+console.log(jonas.species, matilda.species);
+console.log(jonas.hasOwnProperty('firstName'));
+console.log(jonas.hasOwnProperty('species'));
+
+
+//Example with arrays
+
+const arr = [3, 6, 4, 5, 9, 2, 1]
+console.log(arr.__proto__ === Array.prototype);
+console.log(arr.__proto__);
+console.log(arr.__proto__.__proto__); */
+
+
+
+// - - - - - - - - - - - - - - - OOP EXERCISE- - - - - - - - - - - - - - - - - - - 
+
+/* // 1)
+const Car = function (brand, speed) {
+    this.speed = speed;
+    this.brand = brand;
+}
+
+
+// 2)
+Car.prototype.accelerate = function () {
+    console.log(`${this.speed += 10} km/h`)
+}
+
+// 3) 
+Car.prototype.brake = function () {
+    console.log(this.speed -= 5);
+}
+
+
+// 4)
+
+let ferrari = new Car('Ferrari', 20);
+let testla = new Car('Tesla', 40);
+
+ferrari.accelerate()
+ferrari.brake()
+ferrari.accelerate()
+
+testla.accelerate()
+testla.accelerate()
+testla.brake()
+ */
+
+// - - - - - - - - - - - - - - - ES6 CLASSES- - - - - - - - - - - - - - - - - - - 
+
+/* class Person{
+    constructor(firstName, birthYear){
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+
+    //Methods will be added to .prototype property
+    calcAge(){
+        console.log(2037 - this.birthYear);
+    }
+}
+
+const jessica = new Person('Jessica', 1990);
+console.log(jessica);
+jessica.calcAge()
+
+//You can still use prototype 
+Person.prototype.greet= function(){
+    console.log('Hello ' + this.firstName);
+}
+
+jessica.greet()
+
+// 1. Classes are NOT hoisted
+// 2. Classes are first-class-citizens
+// 3. Classes are executed in strict mode
+
+ */
+
+
+// - - - - - - - - - - - - - - - SETTERS AND GETTERS- - - - - - - - - - - - - - - - - - - 
+
+/* const account = {
+    owner: 'Jonas',
+    movements: [200, 530, 120, 300],
+
+    get latest() {
+        return this.movements.slice(-1).pop()
+    },
+
+    set latest(mov){
+        return this.movements.push(mov)
+    }
+}
+
+account.latest = 50
+
+console.log(account.movements); */
+
+// - - - CLASSES
+
+/* class Person {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    greet() {
+        console.log('Hello ' + this.fullName);
+    }
+
+    get age(){
+        return 2037 -this.birthYear;
+    }
+
+    //Set a property that already exists!
+    set fullName(name){
+        if(name.includes(' ')){
+            this._fullName = name
+        }else{
+            alert('Enter fullname!')
+        }
+    }
+
+    get fullName(){
+        return this._fullName
+    }
+}
+
+const jessica = new Person('Jessica Davis', 1990)
+console.log(jessica);
+
+const walter = new Person('Walter Wallace', 1995)
+
+jessica.calcAge()
+jessica.greet()
+
+console.log(jessica.age) */
+
+
+// - - - - - - - - - - - - - - - EXERCISES II - - - - - - - - - - - - - - - - - - - 
+
+
+/* class Car {
+    constructor(brand, speed) {
+        this.brand = brand;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        console.log(`${this.brand} is going at ${this.speed += 10} km/h`);
+    }
+
+    break() {
+        console.log(`${this.brand} is going at ${this.speed -= 5} km/h`);
+    }
+
+
+    get speedUS() {
+        console.log(`${this.brand} is going at ${this.speed / 1.6} ml/h`);
+
+    }
+
+    set speedUS(speed) {
+        console.log(this.speed = speed * 1.6)
+    }
+}
+
+
+let ford = new Car('Ford', 120)
+ford.speedUS;
+ford.accelerate()
+ford.accelerate()
+ford.speedUS;
+
+ford.speedUS = 50
+console.log(ford);
+
+ */
+
+
+// - - - - - - - - - - - - - - - INHERITANCE CONSTRUCTOR FUNCTIONS- - - - - - - - - - - - - - - - - - - 
+
+/* 
+const Person = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+}
+
+Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+}
+
+
+const Student = function (firstName, birthYear, course) {
+   Person.call(this, firstName, birthYear)
+    this.course = course;
+}
+
+//Linking Prototypes
+Student.prototype = Object.create(Person.prototype)
+
+
+Student.prototype.introduce = function () {
+console.log(`My name is ${this.firstName}, I'm studying ${this.course}.`);
+}
+
+Student.prototype.constructor = Student;
+const mike = new Student('Mike', 1990, 'Computer Science');
+console.log(mike);
+
+mike.introduce()
+mike.calcAge() */
+
+
+// - - - - - - - - - - - - - - - INHERITANCE CLASSES ES6- - - - - - - - - - - - - - - - - - - 
+
+/* class Person {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    greet() {
+        console.log('Hello ' + this.fullName);
+    }
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+    //Set a property that already exists!
+    set fullName(name) {
+        if (name.includes(' ')) {
+            this._fullName = name
+        } else {
+            alert('Enter fullname!')
+        }
+    }
+
+    get fullName() {
+        return this._fullName
+    }
+}
+
+const jessica = new Person('Jessica Davis', 1990)
+console.log(jessica);
+
+const walter = new Person('Walter Wallace', 1995)
+
+jessica.calcAge()
+jessica.greet()
+
+
+
+class StudentCl extends Person {
+    constructor(fullName, birthYear, course) {
+        super(fullName, birthYear) //Always need to happen first!
+        this.course = course;
+    }
+
+    introduce() {
+        console.log(`My name is ${this._fullName} and I study ${this.course}`);
+    }
+
+    calcAge() {
+        console.log(`I'm ${2037 - this.birthYear} years old.`);
+    }
+}
+
+const martha = new StudentCl('Martha Jones', 1995, 'Computer Science');
+console.log(martha);
+
+martha.introduce()
+martha.calcAge()
+ */
+
+
+
+// - - - - - - - - - - - - - - - INHERITANCE BETWEEN CLASSES: OBJECT.CREATE - - - - - - - - - - - - - - - - - - - 
+
+
+/* const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear
+    },
+};
+
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+    PersonProto.init.call(this, firstName, birthYear)
+    this.course = course;
+};
+
+StudentProto.introduce = function () {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+
+const jay = Object.create(StudentProto);
+
+jay.init('Jay', 1980, 'Computer Science')
+jay.introduce()
+console.log(jay); */
+
+
+// - - - - - - - - - - - - - - - PRIVATE CLASS FIELDS AND METHODS - - - - - - - - - - - - - - - - - - - 
+
+// 1)Public fields
+// 2)Private fields
+// 3)Public methods
+// 4)Private methods
+// (there is also the static version)
+
+class Account {
+    //Public fields
+    locale = navigator.language;
+
+    // 2) Private fields (instances)
+    #movements = [];
+    #pin;
+
+
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+
+        //Protected property
+        this.#pin = pin;
+        this._movements = [];
+        this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${owner}`);
+    }
+
+    // 3) Public method
+    //Public interface
+
+    getMovements() {
+        return this.#movements;
+    }
+
+    deposit(val) {
+        this.#movements.push(val);
+    }
+
+    withdraw(val) {
+        this.deposit(-val)
+    }
+
+    _approveLoan(val) {
+        return true;
+    }
+
+    requestLoan(val) {
+        // if (this.#approveLoan(val)) {
+        if (this._approveLoan(val)) {
+            this.deposit(val)
+            console.log('Loan approved! 💰');
+        }
+    }
+
+    //4) Private methods
+    // #approveLoan(val) {
+        _approveLoan(val){
+        return true;
+    }
+
+    static helper(){
+        console.log('Helper!');
+    }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+console.log(acc1);
+
+
+acc1.deposit(500);
+acc1.withdraw(100)
+acc1.requestLoan(1000)
+console.log(acc1.getMovements());
+
+//Static
+Account.helper()
+
+
+
